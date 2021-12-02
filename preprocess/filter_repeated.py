@@ -13,7 +13,7 @@ result1 = []
 result2= []
 
 
-#After 
+#After data_2_json.py, this file helps filter out the repeated samples.
 i = 0
 for file in tqdm(files):
     if 'v1' in file:
@@ -35,13 +35,6 @@ for file in tqdm(files):
             result.append(data)
 
 print(len(url_list), len(result))
-
-
-#for r in result:
-    #if r['video_url'] == 'https://video.twimg.com/ext_tw_video/1464229296558514199/pu/vid/1280x720/6eKZfCVq7UIMVOmc.mp4?tag=12':
-        #print(r, '\n')
-
-#print()
 
 with open('./dataset_summary/Twitter_dataset_summary_v1.json', 'w') as f:
     json.dump(result, f)
