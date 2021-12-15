@@ -1,0 +1,93 @@
+import pandas as pd
+filename = '/fs/vulcan-projects/misc_forensics/DATA_VIDEO/COVID19/COVID-videos.csv'
+
+csvfile = open(filename,encoding='utf-8')
+df1 = pd.read_csv(csvfile,engine='python')
+
+
+ids_1 = []
+video_url = {}
+
+for i in tqdm(range(len(df1))):
+    ids_1.append((str(df1['Tweet Id'][i][1:-1])))
+
+    video_url[str(df1['Tweet Id'][i][1:-1])] = df1['Media URL'][i]
+
+print(len(ids_1), len(video_url))
+
+
+
+
+# covid.csv
+filename1 = '/fs/vulcan-projects/misc_forensics/DATA_VIDEO/COVID19/COVID.csv'
+csvfile = open(filename1,encoding='utf-8')
+df2 = pd.read_csv(csvfile)
+
+result1 = []
+
+captions = []
+v_url =[]
+
+
+#print(ids_1[:10])
+for i in tqdm(range(len(df2))):
+    tmp = []
+    Tweet_Id = str(df2['Tweet Id'][i][1:-1])
+    Tweet_url = df2['Tweet URL'][i]
+    content = df2['Tweet Content'][i]
+    content1 = df2['Tweet Content'][i][-5:]
+    retweet = df2['Retweets Received'][i]
+    favorite = df2['Likes Received'][i]
+    location = df2['Tweet Location'][i]
+    language = df2['Tweet Language'][i]
+    user_id = df2['User Id'][i]
+    user_name = df2['Name'][i]
+    user_screen = df2['Screen Name'][i]
+    user_bio = df2['User Bio'][i]
+    veridied = df2['Verified or Non-Verified'][i]
+    user_follower = df2['User Followers'][i]
+    user_following = df2['User Following'][i]
+
+    if Tweet_Id in ids_1:
+        #print(Tweet_Id)
+        if (video_url[Tweet_Id] in v_url) and (content1 in captions):
+            continue
+
+        #tmp.append(video_url[Tweet_Id])
+        tmp.append(Tweet_url)
+        tmp.append(content)
+        tmp.append('"' + Tweet_Id + '"')
+        #tmp.append(retweet)
+        #tmp.append(favorite)
+        #tmp.append(location)
+        #tmp.append(language)
+        #tmp.append(user_id)
+        #tmp.append(user_name)
+        #tmp.append(user_screen)
+        #tmp.append(user_bio)
+        #tmp.append(veridied)
+        #tmp.append(user_follower)
+        #tmp.append(user_following)
+        tmp.append('yaser_v1')
+
+        v_url.append(video_url[Tweet_Id])
+        captions.append(content1)
+
+        result1.append(tmp)
+
+print(len(result1))
+print(result1[0])
+
+'''
+df3 = pd.DataFrame(result1, columns =['Tweet Id', 'Video URL', 'Tweet URL', 'Tweet Content', 'Retweets Received',
+                                      'Likes Received', 'Tweet Location', 'Tweet Language', 'User Id', 'Name', 'Screen Name',
+                                      'User Bio', 'Verified or Non-Verified', 'User Followers', 'User Following'])
+'''
+
+df3 = pd.DataFrame(result1, columns =['Tweet URL', 'Caption', 'Tweet Id', 'Source'])
+
+
+#df3 = pd.DataFrame(result1, columns =['Tweet URL', 'caption'])
+
+#df3.to_csv(index=False)
+df3.to_csv('./dataset_summary/yaser_v2.csv', index=False)
