@@ -5,7 +5,7 @@ The dataset is in the dictionary ‘./data’
 The translation script is in the file ./test.py
 
 ## Instructions to run the Pyhop code on the Satellite dataset.
-Run tmp.py
+Run python tmp.py
 The dataset is stored in three files: object.txt, init.txt, goal.txt.
 The translation script is in the file ./tmp.py
 
