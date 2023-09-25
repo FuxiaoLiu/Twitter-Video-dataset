@@ -8,6 +8,7 @@ We introduce COVID-VTS, a fact-checking dataset for short video platforms. We pr
 ## Getting Data
 - pip install gdown
 - gdown https://drive.google.com/uc?id=1xT4QaOZQlZtW9Ul36VCJ4arZQ94-Ok3V
+- You can match the captions with video by video_id.
 - Please contact fl3es@umd.edu if you have any questions.
   
 ## Citing
