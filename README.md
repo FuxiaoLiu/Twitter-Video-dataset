@@ -6,6 +6,7 @@ We introduce COVID-VTS, a fact-checking dataset for short video platforms. We pr
 
 
 ## Getting Data
+- gdown https://drive.google.com/uc?id=1xT4QaOZQlZtW9Ul36VCJ4arZQ94-Ok3V
 - Our dataset is available upon request. Please contact fl3es@umd.edu
   
 ## Citing
